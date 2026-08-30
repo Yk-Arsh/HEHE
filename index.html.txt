@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+  <div class="card">
+    <h1 class="title">🎉 Happy Birthday! 🎂</h1>
+    <p class="subtitle">Wishing you a day filled with love, laughter, and joy.</p>
+
+    <div class="message-box">
+      <p>Hope this year brings you all the success, happiness, and adventures you deserve!</p>
+    </div>
+
+    <button id="wishBtn" onclick="celebrate()">Click for a Surprise! ✨</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
