@@ -6,7 +6,6 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  /* Default initial background with photo */
   background: linear-gradient(rgba(15, 12, 41, 0.75), rgba(48, 43, 99, 0.75)), 
               url('her-photo.jpg') no-repeat center center fixed;
   background-size: cover;
