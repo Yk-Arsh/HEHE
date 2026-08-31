@@ -1,5 +1,5 @@
 // ==========================================
-// Hloo baccha APKAA BIRTHDAYY HN AAJ APKOO PATAA HNN I MISS YOU SO SO SOO MUCHH Meko na apki 24/7 yaad atti rehti hn likee crazyy walii app na mere cutiee hoo ap kite bade hogye ywrr meko to choti wali lara zyda psnd hn.<br><br>`;
+// CUSTOM MESSAGES & GIFTS
 // ==========================================
 
 const SOFT_ROMANCE_LETTER = `
@@ -9,15 +9,15 @@ May your day be as gentle, beautiful, and light as youuhh are Iff i was there ri
 
 const DARK_ROMANCE_LETTER = `
 🖤 <b>Dark Romance Letter</b><br><br>
-Oh You came heree too mommy?? Happyy birthdayy babygurll Btww iff i wass there with you right now i would have ran to you eat your lipstick like an icyy then i wouldd havee kissed you a 100 times each n everytime i would have make sure u get butterflys in your stomach while bitingg your neckk n holdingg you waist in my handd🌚🖤 like its my personal property (although it is).🥀
+Oh You came heree too mommy?? Happyy birthdayy babygurll Btww iff i wass there with you right now i would have ran to you eat your lipstick like an icyy then i wouldd havee kissed you a 100 times each n everytime i would have make sure u get butterflys in your stomach while bitingg your neckk n holdingg you waist in my handd🌚🖤 like its my personal property (although it is).
 `;
 
-const GIFT_1 = "🕊️ <b>Gift #1:</b> A promise of unconditional peace, continuous support, and total respect for your space. Always quietly in your corner.";
-const GIFT_2 = "✨ <b>Gift #2:</b> 1x Ticket for your favorite coffee or dessert whenever you're ready to catch up—no pressure, no timelines.";
-const GIFT_3 = "⭐ <b>Gift #3:</b> One big universal wish for your upcoming year to bring everything you've been working so hard for.";
+const GIFT_1 = "🕊️ <b>Gift Box #1:</b> want a dyson? Ayo noo thats 50k";
+const GIFT_2 = "✨ <b>Gift Box #2:</b> want an iphone? I gott one hehe use mine";
+const GIFT_3 = "⭐ <b>Gift Box #3:</b> Wantt flowerss baccha?? If yes dmm meh or invite me to roblox";
 
 // ==========================================
-// core APP LOGIC
+// CORE LOGIC
 // ==========================================
 
 function createHeart() {
@@ -33,14 +33,10 @@ function createHeart() {
 }
 setInterval(createHeart, 500);
 
-function showVibeOptions() {
-  document.getElementById('initialBtnGroup').style.display = 'none';
-  document.getElementById('vibeOptions').style.display = 'flex';
-
-  const soft = document.getElementById('softSong');
-  const dark = document.getElementById('darkSong');
-  if (soft) soft.load();
-  if (dark) dark.load();
+function goToPage2() {
+  document.getElementById('page1').style.display = 'none';
+  document.getElementById('page2').style.display = 'block';
+  heartBurst('✨');
 }
 
 function heartBurst(emoji = '💖') {
@@ -68,7 +64,7 @@ function selectVibe(mode) {
 
   const targetAudio = mode === 'soft' ? softAudio : darkAudio;
   if (targetAudio) {
-    targetAudio.play().catch(err => console.log('Audio playback error:', err));
+    targetAudio.play().catch(err => console.log('Audio playback info:', err));
   }
 
   document.getElementById('vibeOptions').style.display = 'none';
@@ -107,7 +103,6 @@ function openGift(option) {
   heartBurst('🎁');
 }
 
-// Allows user to return and select another gift
 function resetGiftSelection() {
   document.getElementById('giftResult').style.display = 'none';
   document.getElementById('giftSection').style.display = 'block';
