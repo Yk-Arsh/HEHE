@@ -12,9 +12,18 @@ const DARK_ROMANCE_LETTER = `
 Oh You came heree too mommy?? Happyy birthdayy babygurll Btww iff i wass there with you right now i would have ran to you eat your lipstick like an icyy then i wouldd havee kissed you a 100 times each n everytime i would have make sure u get butterflys in your stomach while bitingg your neckk n holdingg you waist in my handd🌚🖤 like its my personal property (although it is).
 `;
 
-const GIFT_1 = "🕊️ <b>Gift Box #1:</b> want a dyson? Ayo noo thats 50k";
-const GIFT_2 = "✨ <b>Gift Box #2:</b> want an iphone? I gott one hehe use mine";
-const GIFT_3 = "⭐ <b>Gift Box #3:</b> Wantt flowerss baccha?? If yes dmm meh or invite me to roblox";
+// Soft Romance Gifts
+const SOFT_GIFT_1 = "🕊️ <b>Gift Box #1:</b> want a dyson? Ayo noo thats 50k";
+const SOFT_GIFT_2 = "✨ <b>Gift Box #2:</b> want an iphone? I gott one hehe use mine";
+const SOFT_GIFT_3 = "⭐ <b>Gift Box #3:</b> Wantt flowerss baccha?? If yes dmm meh or invite me to roblox";
+
+// Dark Romance Gifts
+const DARK_GIFT_1 = "🖤 <b>Gift Box #1:</b> A kiss everynight ayo grow a lil but kiddo 🖤";
+const DARK_GIFT_2 = "🌚 <b>Gift Box #2:</b> I Will makee suree to not lett you sleep all night hehe 🌚";
+const DARK_GIFT_3 = "🤩 <b>Gift Box #3:</b> A dark choclate dmm mee again or invite mee 🤩";
+
+// Tracks active vibe ('soft' or 'dark')
+let currentVibe = 'soft';
 
 // ==========================================
 // CORE LOGIC
@@ -56,6 +65,7 @@ function heartBurst(emoji = '💖') {
 }
 
 function selectVibe(mode) {
+  currentVibe = mode;
   const softAudio = document.getElementById('softSong');
   const darkAudio = document.getElementById('darkSong');
 
@@ -67,8 +77,13 @@ function selectVibe(mode) {
     targetAudio.play().catch(err => console.log('Audio playback info:', err));
   }
 
+  // Hide vibe choice blocks
   document.getElementById('vibeOptions').style.display = 'none';
+  document.getElementById('vibeHeaderTitle').style.display = 'none';
+
+  // Display letter and images
   document.getElementById('surpriseMessage').style.display = 'block';
+  document.getElementById('secondPhotoBox').style.display = 'block';
   document.getElementById('giftSection').style.display = 'block';
 
   const surpriseText = document.getElementById('surpriseText');
@@ -90,17 +105,38 @@ function selectVibe(mode) {
   }
 }
 
+function resetVibeSelection() {
+  const softAudio = document.getElementById('softSong');
+  const darkAudio = document.getElementById('darkSong');
+  if (softAudio) { softAudio.pause(); softAudio.currentTime = 0; }
+  if (darkAudio) { darkAudio.pause(); darkAudio.currentTime = 0; }
+
+  document.getElementById('surpriseMessage').style.display = 'none';
+  document.getElementById('secondPhotoBox').style.display = 'none';
+  document.getElementById('giftSection').style.display = 'none';
+  document.getElementById('giftResult').style.display = 'none';
+
+  document.getElementById('vibeHeaderTitle').style.display = 'block';
+  document.getElementById('vibeOptions').style.display = 'flex';
+}
+
 function openGift(option) {
   document.getElementById('giftSection').style.display = 'none';
   const giftResult = document.getElementById('giftResult');
   const giftText = document.getElementById('giftText');
   giftResult.style.display = 'block';
 
-  if (option === 1) giftText.innerHTML = GIFT_1;
-  else if (option === 2) giftText.innerHTML = GIFT_2;
-  else if (option === 3) giftText.innerHTML = GIFT_3;
+  if (currentVibe === 'soft') {
+    if (option === 1) giftText.innerHTML = SOFT_GIFT_1;
+    else if (option === 2) giftText.innerHTML = SOFT_GIFT_2;
+    else if (option === 3) giftText.innerHTML = SOFT_GIFT_3;
+  } else {
+    if (option === 1) giftText.innerHTML = DARK_GIFT_1;
+    else if (option === 2) giftText.innerHTML = DARK_GIFT_2;
+    else if (option === 3) giftText.innerHTML = DARK_GIFT_3;
+  }
 
-  heartBurst('🎁');
+  heartBurst(currentVibe === 'soft' ? '🎁' : '🖤');
 }
 
 function resetGiftSelection() {
