@@ -8,24 +8,54 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-  <div class="card">
+  <!-- Hidden Audio Elements -->
+  <audio id="softSong" src="soft-song.mp3"></audio>
+  <audio id="darkSong" src="dark-song.mp3"></audio>
+
+  <div class="card" id="mainCard">
     <h1 class="title">🎉 Happy Birthday! 🎂</h1>
     <p class="subtitle">Wishing you a peaceful, beautiful day.</p>
 
+    <!-- Main Birthday Message -->
     <div class="message-box">
       <p>Happy Birthday! I know things between us are in a bit of an unusual place right now, but I couldn't let today pass without telling you how deeply I care about you.</p>
       <br>
       <p>You deserve a day that is entirely yours—filled with peace, genuine happiness, and all the quiet moments of joy you so deeply deserve. Even with the space, my feelings haven't changed, and I'm quietly rooting for your happiness and your dreams. Have the most wonderful birthday.</p>
     </div>
-<p>HIEEEEEEEEEE Bacchaaa howw areee youuu ikk you aree finee aurr bataoo kyaa kr rahe areyy hnn HAPPYY BIRTHDAYY i miss you so so much BETUUU i hope so you too 
-Apkii yaad atti hn bhot matlab bhot mujhe tere pass rehnaa na 24hr but kyaa karu abhi itna bada nahi hua hun na mujhe nahi pata ap itna padne wale ho ya nahi
-butt i wishh Kii humm humeshaa saath rahe evenn thoo maii teko deserve nahi krta lekinn cmonn aap to maturee hoo meko jhell lo thodaa meraa bacchaa i swearr to god
-I will gett you everythingg anythingg in the world you wantt iff u stayedd with me foreverr btww i learnt coding only for you i love u so so so muchh hameshaa mere pass rehna
-aurr agrr koii dusra ladkaa akke apko bole that hee lovess u too na us ka muhh fod dena aur kehna he lovess me moree aur fir meko uska naam aur address bata dena hehe aur merese gussa mat hua kr
-maan nahi lagta melaa apkee bina I LOVEE YOUU SO SO SO SO MUCHHHH PLEASEE PLEASEE PLEASEE BEE BEE BEE WITH ME 4 EVER aurr hnn please please agr mai apke upr kabhi chilla dun ya kuch bol dun
- to mere na muh pe ek punch mar dena zorr se aur bolna ARSH ITS ME! mai blushh kr hua ro dunga sacchii muchhii hehe I LOVE YOUU MOREE BTW</p>
-    <div class="button-group">
-      <button id="wishBtn" onclick="celebrate()">Click for a Surprise! ✨</button>
+
+    <!-- Step 1: Initial Button -->
+    <div class="button-group" id="initialBtnGroup">
+      <button id="wishBtn" onclick="showVibeOptions()">Click for a Surprise! ✨</button>
+    </div>
+
+    <!-- Step 2: Vibe Options -->
+    <div id="vibeOptions" style="display: none; margin-top: 15px;" class="button-group">
+      <p style="color: #57606f; font-weight: 600; margin-bottom: 10px;">Pick your mood:</p>
+      <button onclick="selectVibe('soft')" style="background: linear-gradient(45deg, #ff758c, #ff7eb3);">Soft Romance ✨</button>
+      <button onclick="selectVibe('dark')" style="background: linear-gradient(45deg, #2b0826, #6b0f1a); margin-top: 8px;">Dark Romance 🖤</button>
+    </div>
+
+    <!-- Step 3: Surprise Box (Photo + Note) -->
+    <div id="surpriseMessage" style="display: none; margin-top: 20px;" class="message-box">
+      <div class="photo-container" style="margin-bottom: 15px;">
+        <img src="her-photo.jpg" alt="Special Moment" style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);" />
+      </div>
+      <p id="surpriseText"></p>
+    </div>
+
+    <!-- Step 4: Gift Selection -->
+    <div id="giftSection" style="display: none; margin-top: 20px;" class="button-group">
+      <p style="color: #57606f; font-weight: 600; margin-bottom: 10px;">🎁 Pick your virtual gift:</p>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button onclick="openGift(1)" style="flex: 1; padding: 12px; font-size: 1.2rem;">🎁 #1</button>
+        <button onclick="openGift(2)" style="flex: 1; padding: 12px; font-size: 1.2rem;">🎁 #2</button>
+        <button onclick="openGift(3)" style="flex: 1; padding: 12px; font-size: 1.2rem;">🎁 #3</button>
+      </div>
+    </div>
+
+    <!-- Step 5: Revealed Gift Message -->
+    <div id="giftResult" style="display: none; margin-top: 15px;" class="message-box">
+      <p id="giftText" style="font-weight: 600; text-align: center; color: #ff4757;"></p>
     </div>
   </div>
 
