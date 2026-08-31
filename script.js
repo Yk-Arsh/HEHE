@@ -1,4 +1,25 @@
-// Continuous background floating hearts
+// ==========================================
+// ✏️ EDIT YOUR CUSTOM LETTERS & GIFTS HERE
+// ==========================================
+
+const SOFT_ROMANCE_LETTER = `
+✨ <b>Soft Romance Letter</b><br><br>
+May your day be as gentle, beautiful, and light as your soul. Thank you for bringing so much warmth into my world. Wishing you pure peace, bright moments, and endless reason to smile today! 💕
+`;
+
+const DARK_ROMANCE_LETTER = `
+🖤 <b>Dark Romance Letter</b><br><br>
+Distance and quiet moments will never fade what's real. No matter where life takes us or how much time passes, you hold a deeply special place in my heart that nothing can ever alter. 🥀
+`;
+
+const GIFT_1 = "🕊️ <b>Gift #1:</b> A promise of unconditional peace, continuous support, and total respect for your space. Always quietly in your corner.";
+const GIFT_2 = "✨ <b>Gift #2:</b> 1x Ticket for your favorite coffee or dessert whenever you're ready to catch up—no pressure, no timelines.";
+const GIFT_3 = "⭐ <b>Gift #3:</b> One big universal wish for your upcoming year to bring everything you've been working so hard for.";
+
+// ==========================================
+// core APP LOGIC
+// ==========================================
+
 function createHeart() {
   const heart = document.createElement('div');
   heart.classList.add('heart');
@@ -8,22 +29,22 @@ function createHeart() {
   heart.style.fontSize = Math.random() * 15 + 15 + 'px';
   document.body.appendChild(heart);
 
-  setTimeout(() => {
-    heart.remove();
-  }, 7000);
+  setTimeout(() => { heart.remove(); }, 7000);
 }
-
 setInterval(createHeart, 500);
 
-// Reveal vibe options
 function showVibeOptions() {
   document.getElementById('initialBtnGroup').style.display = 'none';
   document.getElementById('vibeOptions').style.display = 'flex';
+
+  const soft = document.getElementById('softSong');
+  const dark = document.getElementById('darkSong');
+  if (soft) soft.load();
+  if (dark) dark.load();
 }
 
-// Burst extra hearts
 function heartBurst(emoji = '💖') {
-  for (let i = 0; i < 18; i++) {
+  for (let i = 0; i < 15; i++) {
     setTimeout(() => {
       const heart = document.createElement('div');
       heart.classList.add('heart');
@@ -33,15 +54,23 @@ function heartBurst(emoji = '💖') {
       heart.style.fontSize = Math.random() * 20 + 20 + 'px';
       document.body.appendChild(heart);
 
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
+      setTimeout(() => { heart.remove(); }, 5000);
     }, i * 150);
   }
 }
 
-// Choice selection logic
 function selectVibe(mode) {
+  const softAudio = document.getElementById('softSong');
+  const darkAudio = document.getElementById('darkSong');
+
+  if (softAudio) { softAudio.pause(); softAudio.currentTime = 0; }
+  if (darkAudio) { darkAudio.pause(); darkAudio.currentTime = 0; }
+
+  const targetAudio = mode === 'soft' ? softAudio : darkAudio;
+  if (targetAudio) {
+    targetAudio.play().catch(err => console.log('Audio playback error:', err));
+  }
+
   document.getElementById('vibeOptions').style.display = 'none';
   document.getElementById('surpriseMessage').style.display = 'block';
   document.getElementById('giftSection').style.display = 'block';
@@ -49,53 +78,37 @@ function selectVibe(mode) {
   const surpriseText = document.getElementById('surpriseText');
 
   if (mode === 'soft') {
-    const softAudio = document.getElementById('softSong');
-    if (softAudio) softAudio.play();
-
-    document.body.style.background = 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%)';
-    surpriseText.innerHTML = "✨ <b>Soft Romance:</b> May your day be as gentle, beautiful, and light as your soul. Thank you for bringing so much warmth into the world—wishing you pure peace and endless smiles today! 💕";
+    document.body.style.background = "linear-gradient(rgba(255, 154, 158, 0.75), rgba(254, 207, 239, 0.75)), url('her-photo.jpg') no-repeat center center fixed";
+    document.body.style.backgroundSize = "cover";
+    surpriseText.innerHTML = SOFT_ROMANCE_LETTER;
     heartBurst('✨');
-
-  } else if (mode === 'dark') {
-    const darkAudio = document.getElementById('darkSong');
-    if (darkAudio) darkAudio.play();
-
-    document.body.style.background = 'linear-gradient(135deg, #0f051d 0%, #290a29 50%, #4a0e17 100%)';
-    surpriseText.innerHTML = "🖤 <b>Dark Romance:</b> Distance and quiet moments will never fade what's real. No matter where we are, you hold a deeply special place in my heart that nothing can change. 🥀";
+  } else {
+    document.body.style.background = "linear-gradient(rgba(15, 5, 29, 0.85), rgba(74, 14, 23, 0.85)), url('her-photo.jpg') no-repeat center center fixed";
+    document.body.style.backgroundSize = "cover";
+    surpriseText.innerHTML = DARK_ROMANCE_LETTER;
     heartBurst('🖤');
   }
 
-  // Trigger Confetti
-  const duration = 2.5 * 1000;
-  const animationEnd = Date.now() + duration;
-  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 100 };
-
-  function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-
-  const interval = setInterval(function() {
-    const timeLeft = animationEnd - Date.now();
-    if (timeLeft <= 0) return clearInterval(interval);
-
-    const particleCount = 50 * (timeLeft / duration);
-    confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
-    confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
-  }, 250);
+  if (typeof confetti === 'function') {
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+  }
 }
 
-// Open Gift Handler
 function openGift(option) {
   document.getElementById('giftSection').style.display = 'none';
   const giftResult = document.getElementById('giftResult');
   const giftText = document.getElementById('giftText');
   giftResult.style.display = 'block';
 
-  if (option === 1) {
-    giftText.innerHTML = "🕊️ <b>Gift #1 Unlocked:</b> A promise of unconditional peace, continuous support, and respect for your space. Always in your corner.";
-  } else if (option === 2) {
-    giftText.innerHTML = "✨ <b>Gift #2 Unlocked:</b> 1x Ticket for your favorite treat or coffee whenever you're ready to catch up—no pressure, no timelines.";
-  } else if (option === 3) {
-    giftText.innerHTML = "⭐ <b>Gift #3 Unlocked:</b> One universal wish for your upcoming year to bring everything you've been working for and dreaming of.";
-  }
+  if (option === 1) giftText.innerHTML = GIFT_1;
+  else if (option === 2) giftText.innerHTML = GIFT_2;
+  else if (option === 3) giftText.innerHTML = GIFT_3;
 
   heartBurst('🎁');
+}
+
+// Allows user to return and select another gift
+function resetGiftSelection() {
+  document.getElementById('giftResult').style.display = 'none';
+  document.getElementById('giftSection').style.display = 'block';
 }
