@@ -10,37 +10,33 @@
 </head>
 <body>
 
-  <!-- Background Audio -->
+  <!-- Audio Elements -->
   <audio id="softSong" src="soft-song.mp3" preload="auto"></audio>
   <audio id="darkSong" src="dark-song.mp3" preload="auto"></audio>
 
-  <!-- PAGE 1: Welcome & Initial Card -->
+  <!-- PAGE 1: Intro Card -->
   <div id="page1" class="card">
     <h1 class="title">🎉 Happy Birthday! 🎂</h1>
     <p class="subtitle">Wishing you a peaceful, beautiful day.</p>
 
-    <!-- Photo Container -->
     <div class="photo-container" style="margin-bottom: 20px; overflow: hidden; border-radius: 12px;">
-      <img src="her-photo.jpg" alt="Special Moment" style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; transform: rotate(90deg); transform-origin: center; scale: 0.8;" />
+      <img src="her-photo.jpg" alt="Special Moment" style="width: 100%; max-height: 280px; object-fit: cover; border-radius: 12px;" />
     </div>
 
-    <!-- Initial Card Message -->
     <div class="message-box">
       <p>Happy Birthday! I know things between us are in a bit of an unusual place right now, but I couldn't let today pass without telling you how deeply I care about you.</p>
       <br>
       <p>You deserve a day that is entirely yours—filled with peace, genuine happiness, and all the quiet moments of joy you so deeply deserve. Have the most wonderful birthday.</p>
     </div>
 
-    <!-- Next Page Button -->
     <div class="button-group">
       <button onclick="goToPage2()">Click for a Surprise! ✨ ➡️</button>
     </div>
   </div>
 
-  <!-- PAGE 2: Letters & Gifts -->
+  <!-- PAGE 2: Vibes, Letters & Gifts -->
   <div id="page2" class="card" style="display: none;">
 
-    <!-- Letter Header Image -->
     <div class="photo-container" style="margin-bottom: 20px; text-align: center;">
       <img src="https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?w=500&auto=format&fit=crop" alt="Love Letter Envelope" style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 12px;" />
     </div>
@@ -52,12 +48,12 @@
       <button onclick="selectVibe('dark')" style="background: linear-gradient(45deg, #2c3e50, #000000);">Dark Romance 🖤</button>
     </div>
 
-    <!-- Custom Letter Display -->
+    <!-- Letter Display -->
     <div id="surpriseMessage" class="message-box" style="display: none; margin-top: 20px;">
       <p id="surpriseText"></p>
     </div>
 
-    <!-- Gift Selection -->
+    <!-- Gift Selection Buttons -->
     <div id="giftSection" style="display: none; margin-top: 20px;">
       <p style="margin-bottom: 12px; font-weight: 600; color: #57606f;">Pick a birthday gift box below: 🎁</p>
       <div class="button-group">
@@ -67,10 +63,10 @@
       </div>
     </div>
 
-    <!-- Unlocked Gift Display with Back Button -->
+    <!-- Gift Result Box (With Back Button) -->
     <div id="giftResult" class="message-box" style="display: none; margin-top: 20px; border-left-color: #ff6b81;">
       <p id="giftText" style="margin-bottom: 15px;"></p>
-      <button onclick="resetGiftSelection()" style="background: #57606f; padding: 8px 16px; font-size: 0.88rem;">🎁 Try another gift</button>
+      <button onclick="resetGiftSelection()" style="background: #57606f; padding: 10px 18px; font-size: 0.9rem;">🎁 Try another gift</button>
     </div>
     
   </div>
