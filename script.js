@@ -1,5 +1,5 @@
 // ==========================================
-// ✏️ EDIT YOUR CUSTOM LETTERS & GIFTS HERE
+// Hloo baccha APKAA BIRTHDAYY HN AAJ APKOO PATAA HNN I MISS YOU SO SO SOO MUCHH Meko na apki 24/7 yaad atti rehti hn likee crazyy walii app na mere cutiee hoo ap kite bade hogye ywrr meko to choti wali lara zyda psnd hn.<br><br>`;
 // ==========================================
 
 const SOFT_ROMANCE_LETTER = `
