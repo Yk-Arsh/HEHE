@@ -1,62 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday!</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-  <!-- Hidden Audio Elements -->
-  <audio id="softSong" src="soft-song.mp3"></audio>
-  <audio id="darkSong" src="dark-song.mp3"></audio>
 
-  <div class="card" id="mainCard">
+  <!-- Background Audio -->
+  <audio id="softSong" src="soft-song.mp3" preload="auto"></audio>
+  <audio id="darkSong" src="dark-song.mp3" preload="auto"></audio>
+
+  <!-- PAGE 1: Welcome & Initial Card -->
+  <div id="page1" class="card">
     <h1 class="title">🎉 Happy Birthday! 🎂</h1>
     <p class="subtitle">Wishing you a peaceful, beautiful day.</p>
 
-    <!-- Main Birthday Message -->
+    <!-- Photo Container -->
+    <div class="photo-container" style="margin-bottom: 20px; overflow: hidden; border-radius: 12px;">
+      <img src="her-photo.jpg" alt="Special Moment" style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; transform: rotate(90deg); transform-origin: center; scale: 0.8;" />
+    </div>
+
+    <!-- Initial Card Message -->
     <div class="message-box">
       <p>Happy Birthday! I know things between us are in a bit of an unusual place right now, but I couldn't let today pass without telling you how deeply I care about you.</p>
       <br>
-      <p>You deserve a day that is entirely yours—filled with peace, genuine happiness, and all the quiet moments of joy you so deeply deserve. Even with the space, my feelings haven't changed, and I'm quietly rooting for your happiness and your dreams. Have the most wonderful birthday.</p>
+      <p>You deserve a day that is entirely yours—filled with peace, genuine happiness, and all the quiet moments of joy you so deeply deserve. Have the most wonderful birthday.</p>
     </div>
 
-    <!-- Step 1: Initial Button -->
-    <div class="button-group" id="initialBtnGroup">
-      <button id="wishBtn" onclick="showVibeOptions()">Click for a Surprise! ✨</button>
+    <!-- Next Page Button -->
+    <div class="button-group">
+      <button onclick="goToPage2()">Click for a Surprise! ✨ ➡️</button>
+    </div>
+  </div>
+
+  <!-- PAGE 2: Letters & Gifts -->
+  <div id="page2" class="card" style="display: none;">
+
+    <!-- Letter Header Image -->
+    <div class="photo-container" style="margin-bottom: 20px; text-align: center;">
+      <img src="https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?w=500&auto=format&fit=crop" alt="Love Letter Envelope" style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 12px;" />
     </div>
 
-    <!-- Step 2: Vibe Options -->
-    <div id="vibeOptions" style="display: none; margin-top: 15px;" class="button-group">
-      <p style="color: #57606f; font-weight: 600; margin-bottom: 10px;">Pick your mood:</p>
-      <button onclick="selectVibe('soft')" style="background: linear-gradient(45deg, #ff758c, #ff7eb3);">Soft Romance ✨</button>
-      <button onclick="selectVibe('dark')" style="background: linear-gradient(45deg, #2b0826, #6b0f1a); margin-top: 8px;">Dark Romance 🖤</button>
+    <!-- Vibe Selection -->
+    <div id="vibeOptions" class="button-group">
+      <p style="margin-bottom: 10px; font-weight: 600; color: #57606f;">Choose your vibe for today:</p>
+      <button onclick="selectVibe('soft')">Soft Romance ✨</button>
+      <button onclick="selectVibe('dark')" style="background: linear-gradient(45deg, #2c3e50, #000000);">Dark Romance 🖤</button>
     </div>
 
-    <!-- Step 3: Surprise Box (Photo + Note) -->
-    <div id="surpriseMessage" style="display: none; margin-top: 20px;" class="message-box">
-      <div class="photo-container" style="margin-bottom: 15px;">
-        <img src="her-photo.jpg" alt="Special Moment" style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);" />
-      </div>
+    <!-- Custom Letter Display -->
+    <div id="surpriseMessage" class="message-box" style="display: none; margin-top: 20px;">
       <p id="surpriseText"></p>
     </div>
 
-    <!-- Step 4: Gift Selection -->
-    <div id="giftSection" style="display: none; margin-top: 20px;" class="button-group">
-      <p style="color: #57606f; font-weight: 600; margin-bottom: 10px;">🎁 Pick your virtual gift:</p>
-      <div style="display: flex; gap: 10px; justify-content: center;">
-        <button onclick="openGift(1)" style="flex: 1; padding: 12px; font-size: 1.2rem;">🎁 #1</button>
-        <button onclick="openGift(2)" style="flex: 1; padding: 12px; font-size: 1.2rem;">🎁 #2</button>
-        <button onclick="openGift(3)" style="flex: 1; padding: 12px; font-size: 1.2rem;">🎁 #3</button>
+    <!-- Gift Selection -->
+    <div id="giftSection" style="display: none; margin-top: 20px;">
+      <p style="margin-bottom: 12px; font-weight: 600; color: #57606f;">Pick a birthday gift box below: 🎁</p>
+      <div class="button-group">
+        <button onclick="openGift(1)">Gift Box #1 🕊️</button>
+        <button onclick="openGift(2)">Gift Box #2 ✨</button>
+        <button onclick="openGift(3)">Gift Box #3 ⭐</button>
       </div>
     </div>
 
-    <!-- Step 5: Revealed Gift Message -->
-    <div id="giftResult" style="display: none; margin-top: 15px;" class="message-box">
-      <p id="giftText" style="font-weight: 600; text-align: center; color: #ff4757;"></p>
+    <!-- Unlocked Gift Display with Back Button -->
+    <div id="giftResult" class="message-box" style="display: none; margin-top: 20px; border-left-color: #ff6b81;">
+      <p id="giftText" style="margin-bottom: 15px;"></p>
+      <button onclick="resetGiftSelection()" style="background: #57606f; padding: 8px 16px; font-size: 0.88rem;">🎁 Try another gift</button>
     </div>
+    
   </div>
 
   <script src="script.js"></script>
