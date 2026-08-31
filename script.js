@@ -4,12 +4,12 @@
 
 const SOFT_ROMANCE_LETTER = `
 ✨ <b>Soft Romance Letter</b><br><br>
-May your day be as gentle, beautiful, and light as your soul. Thank you for bringing so much warmth into my world. Wishing you pure peace, bright moments, and endless reason to smile today! 💕
+May your day be as gentle, beautiful, and light as youuhh are Iff i was there right now i would have ran to hug you so so so tight that You would have said let me go i wouldd have makee you blushh a 10000 timess i love you kiddo 💕
 `;
 
 const DARK_ROMANCE_LETTER = `
 🖤 <b>Dark Romance Letter</b><br><br>
-Distance and quiet moments will never fade what's real. No matter where life takes us or how much time passes, you hold a deeply special place in my heart that nothing can ever alter. 🥀
+Oh You came heree too mommy?? Happyy birthdayy babygurll Btww iff i wass there with you right now i would have ran to you eat your lipstick like an icyy then i wouldd havee kissed you a 100 times each n everytime i would have make sure u get butterflys in your stomach while bitingg your neckk n holdingg you waist in my handd🌚🖤 like its my personal property (although it is).🥀
 `;
 
 const GIFT_1 = "🕊️ <b>Gift #1:</b> A promise of unconditional peace, continuous support, and total respect for your space. Always quietly in your corner.";
