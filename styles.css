@@ -10,8 +10,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(rgba(15, 5, 29, 0.75), rgba(74, 14, 23, 0.75)), url('her-photo.jpg') no-repeat center center fixed;
-  background-size: cover;
+  /* CLEAN DARK GRADIENT BACKGROUND (No giant background photo) */
+  background: linear-gradient(135deg, #0f051d 0%, #2a0813 50%, #0a0314 100%);
+  background-attachment: fixed;
   overflow-x: hidden;
   position: relative;
   padding: 20px 0;
@@ -45,7 +46,7 @@ body {
 }
 
 .card {
-  background: rgba(20, 15, 30, 0.75);
+  background: rgba(20, 15, 30, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.18);
