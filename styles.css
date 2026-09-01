@@ -10,7 +10,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0f051d 0%, #2a0813 50%, #0a0314 100%);
+  /* Full screen photo background with a subtle dark overlay so text stays readable */
+  background-image: linear-gradient(rgba(15, 5, 29, 0.65), rgba(10, 3, 20, 0.75)), url('her-photo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   overflow-x: hidden;
   position: relative;
@@ -45,7 +49,7 @@ body {
 }
 
 .card {
-  background: rgba(20, 15, 30, 0.85);
+  background: rgba(20, 15, 30, 0.82);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.18);
