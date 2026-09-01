@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday!</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-  <audio id="softSong" src="soft-song.mp3" preload="auto"></audio>
-  <audio id="darkSong" src="dark-song.mp3" preload="auto"></audio>
-
-  <!-- PAGE 1 -->
-  <div class="card-wrapper" id="page1">
-    <div class="deco-peek deco-top-left">🌸</div>
-    <div class="deco-peek deco-top-right">💖</div>
-    <div class="deco-peek deco-bottom-left">✨</div>
-    <div class="deco-peek deco-bottom-right">🌹</div>
+  <!-- PAGE 1: Welcome Screen -->
+  <div id="page1" class="card-wrapper">
+    <div class="deco-peek deco-top-left">💖</div>
+    <div class="deco-peek deco-top-right">🌸</div>
+    <div class="deco-peek deco-bottom-left">🌹</div>
+    <div class="deco-peek deco-bottom-right">✨</div>
 
     <div class="card">
       <h1 class="title">🎉 Happy Birthday! 🎂</h1>
       <p class="subtitle">Wishing you a peaceful, beautiful day.</p>
-
+      
       <div class="photo-container">
         <img src="her-photo.jpg" alt="Special Moment" class="main-img" />
       </div>
 
-      <div class="message-box">
+      <div class="message-box" style="margin-bottom: 20px;">
         <p>Happy Birthday! I know things between us are in a bit of an unusual place right now, but I couldn't let today pass without telling you how deeply I care about you.</p>
         <br>
         <p>You deserve a day that is entirely yours—filled with peace, genuine happiness, and all the quiet moments of joy you so deeply deserve. Have the most wonderful birthday.</p>
       </div>
 
-      <div class="button-group" style="margin-top: 20px;">
-        <button onclick="goToPage2()">Click for a Surprise! ✨ ➡️</button>
-      </div>
+      <button onclick="goToPage2()">Click for a Surprise! ✨ ➡️</button>
     </div>
   </div>
 
-  <!-- PAGE 2 -->
-  <div class="card-wrapper" id="page2" style="display: none;">
+  <!-- PAGE 2: Vibe Selection & Surprise Letters -->
+  <div id="page2" class="card-wrapper" style="display: none;">
     <div class="deco-peek deco-top-left">💖</div>
     <div class="deco-peek deco-top-right">🌸</div>
     <div class="deco-peek deco-bottom-left">🌹</div>
@@ -49,35 +44,42 @@
     <div class="card">
       <p id="vibeHeaderTitle">Choose your vibe for today:</p>
 
+      <!-- Vibe Options -->
       <div id="vibeOptions">
         <div class="vibe-card soft-vibe">
-          <div class="letter-icon-box">
-            <span style="font-size: 3rem;">💌</span>
-          </div>
-          <button onclick="selectVibe('soft')" class="btn-soft">Soft Romance ✨</button>
+          <div class="letter-icon-box">💌</div>
+          <button class="btn-soft" onclick="selectVibe('soft')">Soft Romance ✨</button>
         </div>
 
         <div class="vibe-card dark-vibe">
-          <div class="letter-icon-box">
-            <span style="font-size: 3rem;">🖤</span>
-          </div>
-          <button onclick="selectVibe('dark')" class="btn-dark">Dark Romance 🖤</button>
+          <div class="letter-icon-box">🖤</div>
+          <button class="btn-dark" onclick="selectVibe('dark')">Dark Romance 💜</button>
+        </div>
+
+        <!-- Next Chapter Button placed below both vibe boxes -->
+        <div style="text-align: center; margin-top: 10px;">
+          <button onclick="goToPage3()" style="padding: 12px; font-size: 0.95rem;">Next Chapter ➡️</button>
         </div>
       </div>
 
-      <div id="surpriseMessage" class="message-box" style="display: none; margin-top: 20px;">
-        <p id="surpriseText"></p>
+      <!-- Surprise Message (Hidden initially) -->
+      <div id="surpriseMessage" style="display: none;">
+        <div class="message-box">
+          <p id="surpriseText"></p>
+        </div>
         <div style="text-align: center; margin-top: 15px;">
           <button onclick="resetVibeSelection()" class="btn-subtle">✨ Read the other letter</button>
         </div>
       </div>
 
+      <!-- Second Photo Container -->
       <div id="secondPhotoBox" class="photo-container" style="display: none; margin-top: 20px;">
-        <img src="second-photo.jpg" alt="Another Special Moment" class="main-img" />
+        <img src="second-photo.jpg" alt="Special Memory" class="main-img" />
       </div>
 
+      <!-- Interactive Gift Boxes Section -->
       <div id="giftSection" style="display: none; margin-top: 20px;">
-        <p style="margin-bottom: 12px; font-weight: 600; color: #f1f1f1; text-align: center;">Pick a birthday gift box below: 🎁</p>
+        <p style="text-align: center; margin-bottom: 12px; font-weight: 600;">Pick a birthday gift box below: 🎁</p>
         <div class="button-group">
           <button onclick="openGift(1)">Gift Box #1 🕊️</button>
           <button onclick="openGift(2)">Gift Box #2 ✨</button>
@@ -85,9 +87,12 @@
         </div>
       </div>
 
-      <div id="giftResult" class="message-box" style="display: none; margin-top: 20px;">
-        <p id="giftText" style="margin-bottom: 15px;"></p>
-        <div style="text-align: center;">
+      <!-- Gift Outcome Display -->
+      <div id="giftResult" style="display: none; margin-top: 20px;">
+        <div class="message-box">
+          <p id="giftText"></p>
+        </div>
+        <div style="text-align: center; margin-top: 15px;">
           <button onclick="resetGiftSelection()" class="btn-subtle">🎁 Try another gift</button>
         </div>
       </div>
@@ -95,12 +100,12 @@
     </div>
   </div>
 
-  <!-- PAGE 3 -->
-  <div class="card-wrapper" id="page3" style="display: none;">
-    <div class="deco-peek deco-top-left">👑</div>
-    <div class="deco-peek deco-top-right">✨</div>
-    <div class="deco-peek deco-bottom-left">💖</div>
-    <div class="deco-peek deco-bottom-right">🌙</div>
+  <!-- PAGE 3: Heartfelt Final Letter -->
+  <div id="page3" class="card-wrapper" style="display: none;">
+    <div class="deco-peek deco-top-left">💖</div>
+    <div class="deco-peek deco-top-right">🌸</div>
+    <div class="deco-peek deco-bottom-left">🌹</div>
+    <div class="deco-peek deco-bottom-right">✨</div>
 
     <div class="card">
       <h1 class="title">One Last Thing... 💭</h1>
@@ -121,6 +126,9 @@
       </div>
     </div>
   </div>
+
+  <audio id="softSong" src="soft-song.mp3" preload="auto"></audio>
+  <audio id="darkSong" src="dark-song.mp3" preload="auto"></audio>
 
   <script src="script.js"></script>
 </body>
