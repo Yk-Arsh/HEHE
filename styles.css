@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Full screen photo background with a subtle dark overlay so text stays readable */
+  /* Fixed full-screen photo background with dark overlay */
   background-image: linear-gradient(rgba(15, 5, 29, 0.65), rgba(10, 3, 20, 0.75)), url('her-photo.jpg');
   background-size: cover;
   background-position: center;
@@ -19,25 +19,6 @@ body {
   overflow-x: hidden;
   position: relative;
   padding: 20px 0;
-}
-
-.deco-peek {
-  position: absolute;
-  z-index: 1;
-  font-size: 2.2rem;
-  pointer-events: none;
-  animation: float 4s ease-in-out infinite;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
-}
-
-.deco-top-left { top: -20px; left: -15px; animation-delay: 0s; }
-.deco-top-right { top: -20px; right: -15px; animation-delay: 1s; }
-.deco-bottom-left { bottom: -15px; left: -15px; animation-delay: 2s; }
-.deco-bottom-right { bottom: -15px; right: -15px; animation-delay: 1.5s; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(5deg); }
 }
 
 .card-wrapper {
@@ -59,22 +40,23 @@ body {
   color: #ffffff;
 }
 
+/* Restricts width so portrait images keep their proper shape without zooming */
 .photo-container {
   width: 100%;
+  max-width: 320px;
+  margin: 0 auto 20px auto;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  margin-bottom: 20px;
   background: rgba(0, 0, 0, 0.2);
 }
 
+/* Lets portrait images scale naturally without cropping or stretching */
 .main-img {
   width: 100%;
   height: auto;
-  max-height: 320px;
-  object-fit: cover;
-  object-position: center;
   display: block;
+  object-fit: contain;
 }
 
 .title {
@@ -120,17 +102,6 @@ body {
 .dark-vibe {
   background: rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.letter-icon-box {
-  width: 100%;
-  height: 110px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  margin-bottom: 12px;
 }
 
 .message-box {
@@ -181,18 +152,4 @@ button {
 button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.heart {
-  position: fixed;
-  top: -10vh;
-  z-index: 0;
-  pointer-events: none;
-  animation: fall linear forwards;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(105vh) rotate(360deg);
-  }
 }
