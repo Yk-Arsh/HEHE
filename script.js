@@ -21,10 +21,20 @@ function selectVibe(vibe) {
     if (softSong) softSong.play().catch(e => console.log("Audio play blocked"));
     
     surpriseText.innerHTML = `
-      <strong>Soft Romance Letter</strong><br><br>
-      Happy Birthday! Even with everything going on, I want you to know how special you are. You bring a kind of warmth and light into people's lives that's hard to find, and today is all about celebrating you and everything that makes you wonderful.
+      <strong>✨ Soft Romance Letter</strong><br><br>
+      May your day be as gentle, beautiful, and light as youuhh are Iff i was there right now i would have ran to you hug you so so so tight that You would have said let me go i wouldd have makee you blushh a 10000 timess i love you kiddo 💕
+      
+      <div style="margin-top: 20px; text-align: center;">
+        <button onclick="goToPage3()" class="btn-soft" style="padding: 12px; font-size: 0.95rem;">Next Chapter ➡️</button>
+      </div>
     `;
-    secondPhotoBox.style.display = 'none';
+    
+    const secondImg = secondPhotoBox.querySelector('img');
+    if (secondImg) {
+      secondImg.src = 'second-photo.jpg';
+    }
+
+    secondPhotoBox.style.display = 'block';
     giftSection.style.display = 'block';
 
   } else if (vibe === 'dark') {
@@ -32,16 +42,18 @@ function selectVibe(vibe) {
     if (darkSong) darkSong.play().catch(e => console.log("Audio play blocked"));
     
     surpriseText.innerHTML = `
-      <strong>Dark Romance Letter</strong><br><br>
+      <strong>🖤 Dark Romance Letter</strong><br><br>
       Oh You came here too mommy?? Happyy birthdayy babygurll Btww iff i wass there with you right now i would have ran to you eat your lipstick like an icyy then i wouldd havee kissed you a 100 times each n everytime i would have make sure u get butterflys in your stomach while bitingg your neckk n holdingg your waist in my handd 🪻🖤 like its my personal property (although it is).
       
-      <div style="margin-top: 25px; text-align: center;">
+      <div style="margin-top: 20px; text-align: center;">
         <button onclick="goToPage3()" class="btn-dark" style="padding: 12px; font-size: 0.95rem;">Next Chapter ➡️</button>
       </div>
     `;
     
     const secondImg = secondPhotoBox.querySelector('img');
-    if (secondImg) secondImg.src = 'second-photo.jpg';
+    if (secondImg) {
+      secondImg.src = 'second-photo.jpg';
+    }
 
     secondPhotoBox.style.display = 'block';
     giftSection.style.display = 'block';
