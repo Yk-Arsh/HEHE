@@ -1,145 +1,122 @@
-// ==========================================
-// CUSTOM MESSAGES & GIFTS
-// ==========================================
-
-const SOFT_ROMANCE_LETTER = `
-✨ <b>Soft Romance Letter</b><br><br>
-May your day be as gentle, beautiful, and light as youuhh are Iff i was there right now i would have ran to hug you so so so tight that You would have said let me go i wouldd have makee you blushh a 10000 timess i love you kiddo 💕
-`;
-
-const DARK_ROMANCE_LETTER = `
-🖤 <b>Dark Romance Letter</b><br><br>
-Oh You came heree too mommy?? Happyy birthdayy babygurll Btww iff i wass there with you right now i would have ran to you eat your lipstick like an icyy then i wouldd havee kissed you a 100 times each n everytime i would have make sure u get butterflys in your stomach while bitingg your neckk n holdingg you waist in my handd🌚🖤 like its my personal property (although it is).
-`;
-
-// Soft Romance Gifts
-const SOFT_GIFT_1 = "🕊️ <b>Gift Box #1:</b> want a dyson? Ayo noo thats 50k";
-const SOFT_GIFT_2 = "✨ <b>Gift Box #2:</b> want an iphone? I gott one hehe use mine";
-const SOFT_GIFT_3 = "⭐ <b>Gift Box #3:</b> Wantt flowerss baccha?? If yes dmm meh or invite me to roblox";
-
-// Dark Romance Gifts
-const DARK_GIFT_1 = "🖤 <b>Gift Box #1:</b> A kiss everynight ayo grow a lil but kiddo 🖤";
-const DARK_GIFT_2 = "🌚 <b>Gift Box #2:</b> I Will makee suree to not lett you sleep all night hehe 🌚";
-const DARK_GIFT_3 = "🤩 <b>Gift Box #3:</b> A dark choclate dmm mee again or invite mee 🤩";
-
-// Tracks active vibe ('soft' or 'dark')
 let currentVibe = 'soft';
 
-// ==========================================
-// CORE LOGIC
-// ==========================================
-
-function createHeart() {
-  const heart = document.createElement('div');
-  heart.classList.add('heart');
-  heart.innerHTML = '❤️';
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.animationDuration = Math.random() * 3 + 4 + 's';
-  heart.style.fontSize = Math.random() * 15 + 15 + 'px';
-  document.body.appendChild(heart);
-
-  setTimeout(() => { heart.remove(); }, 7000);
-}
-setInterval(createHeart, 500);
-
-function goToPage2() {
-  document.getElementById('page1').style.display = 'none';
-  document.getElementById('page2').style.display = 'block';
-  heartBurst('✨');
-}
-
-function heartBurst(emoji = '💖') {
-  for (let i = 0; i < 15; i++) {
-    setTimeout(() => {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerHTML = emoji;
-      heart.style.left = Math.random() * 80 + 10 + 'vw';
-      heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-      heart.style.fontSize = Math.random() * 20 + 20 + 'px';
-      document.body.appendChild(heart);
-
-      setTimeout(() => { heart.remove(); }, 5000);
-    }, i * 150);
-  }
-}
-
-function selectVibe(mode) {
-  currentVibe = mode;
-  const softAudio = document.getElementById('softSong');
-  const darkAudio = document.getElementById('darkSong');
-
-  if (softAudio) { softAudio.pause(); softAudio.currentTime = 0; }
-  if (darkAudio) { darkAudio.pause(); darkAudio.currentTime = 0; }
-
-  const targetAudio = mode === 'soft' ? softAudio : darkAudio;
-  if (targetAudio) {
-    targetAudio.play().catch(err => console.log('Audio playback info:', err));
-  }
-
-  // Hide vibe choice blocks
-  document.getElementById('vibeOptions').style.display = 'none';
-  document.getElementById('vibeHeaderTitle').style.display = 'none';
-
-  // Display letter and images
-  document.getElementById('surpriseMessage').style.display = 'block';
-  document.getElementById('secondPhotoBox').style.display = 'block';
-  document.getElementById('giftSection').style.display = 'block';
-
+function selectVibe(vibe) {
+  currentVibe = vibe;
+  const vibeOptions = document.getElementById('vibeOptions');
+  const vibeHeader = document.getElementById('vibeHeaderTitle');
+  const surpriseMsg = document.getElementById('surpriseMessage');
   const surpriseText = document.getElementById('surpriseText');
+  const secondPhotoBox = document.getElementById('secondPhotoBox');
+  const giftSection = document.getElementById('giftSection');
 
-  if (mode === 'soft') {
-    document.body.style.background = "linear-gradient(rgba(255, 154, 158, 0.75), rgba(254, 207, 239, 0.75)), url('her-photo.jpg') no-repeat center center fixed";
-    document.body.style.backgroundSize = "cover";
-    surpriseText.innerHTML = SOFT_ROMANCE_LETTER;
-    heartBurst('✨');
-  } else {
-    document.body.style.background = "linear-gradient(rgba(15, 5, 29, 0.85), rgba(74, 14, 23, 0.85)), url('her-photo.jpg') no-repeat center center fixed";
-    document.body.style.backgroundSize = "cover";
-    surpriseText.innerHTML = DARK_ROMANCE_LETTER;
-    heartBurst('🖤');
-  }
+  vibeOptions.style.display = 'none';
+  vibeHeader.style.display = 'none';
+  surpriseMsg.style.display = 'block';
 
-  if (typeof confetti === 'function') {
-    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+  const softSong = document.getElementById('softSong');
+  const darkSong = document.getElementById('darkSong');
+
+  if (vibe === 'soft') {
+    if (darkSong) darkSong.pause();
+    if (softSong) softSong.play().catch(e => console.log("Audio play blocked"));
+    
+    surpriseText.innerHTML = `
+      <strong>Soft Romance Letter</strong><br><br>
+      Happy Birthday! Even with everything going on, I want you to know how special you are. You bring a kind of warmth and light into people's lives that's hard to find, and today is all about celebrating you and everything that makes you wonderful.
+    `;
+    secondPhotoBox.style.display = 'none';
+    giftSection.style.display = 'block';
+
+  } else if (vibe === 'dark') {
+    if (softSong) softSong.pause();
+    if (darkSong) darkSong.play().catch(e => console.log("Audio play blocked"));
+    
+    surpriseText.innerHTML = `
+      <strong>Dark Romance Letter</strong><br><br>
+      Oh You came here too mommy?? Happyy birthdayy babygurll Btww iff i wass there with you right now i would have ran to you eat your lipstick like an icyy then i wouldd havee kissed you a 100 times each n everytime i would have make sure u get butterflys in your stomach while bitingg your neckk n holdingg your waist in my handd 🪻🖤 like its my personal property (although it is).
+      
+      <div style="margin-top: 25px; text-align: center;">
+        <button onclick="goToPage3()" class="btn-dark" style="padding: 12px; font-size: 0.95rem;">Next Chapter ➡️</button>
+      </div>
+    `;
+    
+    const secondImg = secondPhotoBox.querySelector('img');
+    if (secondImg) secondImg.src = 'second-photo.jpg';
+
+    secondPhotoBox.style.display = 'block';
+    giftSection.style.display = 'block';
   }
 }
 
-function resetVibeSelection() {
-  const softAudio = document.getElementById('softSong');
-  const darkAudio = document.getElementById('darkSong');
-  if (softAudio) { softAudio.pause(); softAudio.currentTime = 0; }
-  if (darkAudio) { darkAudio.pause(); darkAudio.currentTime = 0; }
-
-  document.getElementById('surpriseMessage').style.display = 'none';
-  document.getElementById('secondPhotoBox').style.display = 'none';
-  document.getElementById('giftSection').style.display = 'none';
-  document.getElementById('giftResult').style.display = 'none';
-
-  document.getElementById('vibeHeaderTitle').style.display = 'block';
-  document.getElementById('vibeOptions').style.display = 'flex';
-}
-
-function openGift(option) {
-  document.getElementById('giftSection').style.display = 'none';
+function openGift(boxNumber) {
   const giftResult = document.getElementById('giftResult');
   const giftText = document.getElementById('giftText');
+  const giftSection = document.getElementById('giftSection');
+
+  giftSection.style.display = 'none';
   giftResult.style.display = 'block';
 
   if (currentVibe === 'soft') {
-    if (option === 1) giftText.innerHTML = SOFT_GIFT_1;
-    else if (option === 2) giftText.innerHTML = SOFT_GIFT_2;
-    else if (option === 3) giftText.innerHTML = SOFT_GIFT_3;
-  } else {
-    if (option === 1) giftText.innerHTML = DARK_GIFT_1;
-    else if (option === 2) giftText.innerHTML = DARK_GIFT_2;
-    else if (option === 3) giftText.innerHTML = DARK_GIFT_3;
+    if (boxNumber === 1) {
+      giftText.innerHTML = "🕊️ <strong>Gift Box #1:</strong> A lifetime supply of patience, peace, and someone who will always listen to you when things get heavy.";
+    } else if (boxNumber === 2) {
+      giftText.innerHTML = "✨ <strong>Gift Box #2:</strong> A safe harbor. No matter how busy things get or where life takes us, you always have a place where you matter completely.";
+    } else if (boxNumber === 3) {
+      giftText.innerHTML = "⭐ <strong>Gift Box #3:</strong> wantt flowerss ?? 🤩 invite me or dmm";
+    }
+  } else if (currentVibe === 'dark') {
+    if (boxNumber === 1) {
+      giftText.innerHTML = "🖤 <strong>Gift Box #1:</strong> Unlimited neck bites, holding you close, and never letting you go.";
+    } else if (boxNumber === 2) {
+      giftText.innerHTML = "🪻 <strong>Gift Box #2:</strong> Stealing all your lipsticks one kiss at a time.";
+    } else if (boxNumber === 3) {
+      giftText.innerHTML = "👑 <strong>Gift Box #3:</strong> Being completely yours, no matter where we are.";
+    }
   }
 
-  heartBurst(currentVibe === 'soft' ? '🎁' : '🖤');
+  if (typeof confetti === 'function') {
+    confetti({ particleCount: 70, spread: 70, origin: { y: 0.6 } });
+  }
 }
 
 function resetGiftSelection() {
   document.getElementById('giftResult').style.display = 'none';
   document.getElementById('giftSection').style.display = 'block';
+}
+
+function goToPage2() {
+  document.getElementById('page1').style.display = 'none';
+  document.getElementById('page2').style.display = 'block';
+}
+
+function goToPage3() {
+  document.getElementById('page1').style.display = 'none';
+  document.getElementById('page2').style.display = 'none';
+  document.getElementById('page3').style.display = 'block';
+  
+  if (typeof confetti === 'function') {
+    confetti({ particleCount: 60, spread: 80, origin: { y: 0.6 } });
+  }
+}
+
+function resetVibeSelection() {
+  document.getElementById('vibeOptions').style.display = 'flex';
+  document.getElementById('vibeHeaderTitle').style.display = 'block';
+  document.getElementById('surpriseMessage').style.display = 'none';
+  document.getElementById('secondPhotoBox').style.display = 'none';
+  document.getElementById('giftSection').style.display = 'none';
+  document.getElementById('giftResult').style.display = 'none';
+}
+
+function restartExperience() {
+  document.getElementById('page3').style.display = 'none';
+  document.getElementById('page2').style.display = 'none';
+  document.getElementById('page1').style.display = 'block';
+
+  const soft = document.getElementById('softSong');
+  const dark = document.getElementById('darkSong');
+  if (soft) soft.pause();
+  if (dark) dark.pause();
+
+  resetVibeSelection();
 }
