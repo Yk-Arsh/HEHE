@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <!-- PAGE 1: Welcome Screen with Initial Lock Gate -->
+  <!-- PAGE 1: Welcome Screen & Lock Gate -->
   <div id="page1" class="card-wrapper">
     <div class="deco-peek deco-top-left">💖</div>
     <div class="deco-peek deco-top-right">🌸</div>
@@ -66,7 +66,6 @@
     <div class="card">
       <p id="vibeHeaderTitle">Choose your vibe for today:</p>
 
-      <!-- Vibe Options -->
       <div id="vibeOptions">
         <div class="vibe-card soft-vibe">
           <div class="letter-icon-box">💌</div>
@@ -78,13 +77,11 @@
           <button class="btn-dark" onclick="selectVibe('dark')">Dark Romance 💜</button>
         </div>
 
-        <!-- Next Chapter Button placed directly below both vibe cards -->
         <div style="text-align: center; margin-top: 10px;">
           <button onclick="goToPage3()" style="padding: 12px; font-size: 0.95rem;">Next Chapter ➡️</button>
         </div>
       </div>
 
-      <!-- Surprise Message (Hidden initially) -->
       <div id="surpriseMessage" style="display: none;">
         <div class="message-box">
           <p id="surpriseText"></p>
@@ -94,12 +91,10 @@
         </div>
       </div>
 
-      <!-- Second Photo Container -->
       <div id="secondPhotoBox" class="photo-container" style="display: none; margin-top: 20px;">
         <img src="second-photo.jpg" alt="Special Memory" class="main-img" />
       </div>
 
-      <!-- Interactive Gift Boxes Section -->
       <div id="giftSection" style="display: none; margin-top: 20px;">
         <p style="text-align: center; margin-bottom: 12px; font-weight: 600;">Pick a birthday gift box below: 🎁</p>
         <div class="button-group">
@@ -109,7 +104,6 @@
         </div>
       </div>
 
-      <!-- Gift Outcome Display -->
       <div id="giftResult" style="display: none; margin-top: 20px;">
         <div class="message-box">
           <p id="giftText"></p>
