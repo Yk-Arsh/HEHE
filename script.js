@@ -1,5 +1,19 @@
 let currentVibe = 'soft';
 
+// Passcode Gate Logic for Page 1 Entrance
+function checkPasscode() {
+  const input = document.getElementById("passcodeInput").value;
+  const errorMsg = document.getElementById("passcodeError");
+  
+  if (input === "060911") {
+    triggerExplosion();
+    document.getElementById("passcodeGate").style.display = "none";
+    document.getElementById("landingContent").style.display = "block";
+  } else {
+    errorMsg.style.display = "block";
+  }
+}
+
 // Floating background elements generator
 function createFloatingBackground() {
   const container = document.createElement('div');
@@ -153,11 +167,46 @@ function restartExperience() {
   document.getElementById('page2').style.display = 'none';
   document.getElementById('page1').style.display = 'block';
 
+  // Reset back to passcode gate if restarted
+  document.getElementById('landingContent').style.display = 'none';
+  document.getElementById('passcodeGate').style.display = 'block';
+  document.getElementById('passcodeInput').value = '';
+
   resetVibeSelection();
   window.scrollTo(0, 0);
 }
 
-// Start falling background elements on load
+// Live Birthday Countdown Timer
+const birthdayTarget = new Date("September 6, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const timeDifference = birthdayTarget - now;
+
+  if (timeDifference > 0) {
+    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+    const formattedHours = String(hours).padStart(2, '0');
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    const timerElement = document.getElementById("countdownDisplay");
+    if (timerElement) {
+      timerElement.innerHTML = `${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
+    }
+  } else {
+    const timerElement = document.getElementById("countdownDisplay");
+    if (timerElement) {
+      timerElement.innerHTML = "🎉 IT'S OFFICIALLY YOUR DAY! 🎉";
+    }
+  }
+}
+
+// Start falling background elements and countdown on load
 document.addEventListener('DOMContentLoaded', () => {
   createFloatingBackground();
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
 });
