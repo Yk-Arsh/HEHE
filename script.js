@@ -1,14 +1,19 @@
 let currentVibe = 'soft';
 
-// Passcode Gate Logic for Page 1 Entrance
+// Passcode Gate Logic
 function checkPasscode() {
-  const input = document.getElementById("passcodeInput").value;
+  const inputField = document.getElementById("passcodeInput");
   const errorMsg = document.getElementById("passcodeError");
+  const passcodeGate = document.getElementById("passcodeGate");
+  const landingContent = document.getElementById("landingContent");
   
-  if (input === "060911") {
+  if (!inputField) return;
+
+  if (inputField.value.trim() === "060911") {
     triggerExplosion();
-    document.getElementById("passcodeGate").style.display = "none";
-    document.getElementById("landingContent").style.display = "block";
+    if (passcodeGate) passcodeGate.style.display = "none";
+    if (landingContent) landingContent.style.display = "block";
+    if (errorMsg) errorMsg.style.display = "none";
   } else {
     if (errorMsg) errorMsg.style.display = "block";
   }
@@ -178,7 +183,6 @@ function restartExperience() {
   document.getElementById('page2').style.display = 'none';
   document.getElementById('page1').style.display = 'block';
 
-  // Reset back to passcode gate if restarted
   document.getElementById('landingContent').style.display = 'none';
   document.getElementById('passcodeGate').style.display = 'block';
   document.getElementById('passcodeInput').value = '';
@@ -216,9 +220,9 @@ function updateCountdown() {
   }
 }
 
-// Start floating background elements and timer on load
-document.addEventListener('DOMContentLoaded', () => {
+// Initialization on load
+window.onload = () => {
   createFloatingBackground();
   setInterval(updateCountdown, 1000);
   updateCountdown();
-});
+};
