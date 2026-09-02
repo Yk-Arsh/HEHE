@@ -184,6 +184,7 @@ function updateCountdown() {
   const timeDifference = birthdayTarget - now;
 
   if (timeDifference > 0) {
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
@@ -194,7 +195,7 @@ function updateCountdown() {
 
     const timerElement = document.getElementById("countdownDisplay");
     if (timerElement) {
-      timerElement.innerHTML = `${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
+      timerElement.innerHTML = `${days}d ${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
     }
   } else {
     const timerElement = document.getElementById("countdownDisplay");
@@ -203,10 +204,3 @@ function updateCountdown() {
     }
   }
 }
-
-// Start falling background elements and countdown on load
-document.addEventListener('DOMContentLoaded', () => {
-  createFloatingBackground();
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-});
